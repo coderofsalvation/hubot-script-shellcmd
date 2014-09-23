@@ -1,7 +1,8 @@
 hubot-script-shellcmd
 =====================
 
-Easily list/Execute shellcommands from a specified folder
+Easily list/Execute shellcommands from a specified folder, and logs to rsyslog
+whenever possible.
 
 ### Commands:
 
