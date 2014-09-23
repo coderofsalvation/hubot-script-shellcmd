@@ -1,0 +1,42 @@
+#!/bin/bash 
+SELF_PATH="$(dirname "$(readlink -f "$0")")"; cd $SELF_PATH;
+TMPFILE="/tmp/.handler.$(whoami)"
+#DEBUG=1
+
+_log(){
+  which logger &>/dev/null && logger -t hubot -p local3.notice "$*"; return 0
+}
+
+_usage(){
+  str="available commands:\n"
+  str="$str""$(ls "$SELF_PATH/handlers" | awk '{print "  "$1}' )"
+  echo -e "$str"
+}
+
+is_function() {
+  ls $SELF_PATH/handlers/$1* &>/dev/null && return 0 || return 1
+}
+
+check_error(){
+  [[ ! X"$(wc -c "$1" | cut -d" " -f1)" = X"0" ]] && {
+    echo "please check the logs, the command was unsuccesfull :/"
+    cat "$1" | while read line; do _log "$line"; done
+  }
+}
+
+# only process if not included by other script
+me="$(basename "$0")"; me="${me/\.\/}"
+if [[ "$me" == "handler" ]]; then 
+  _log "$*"
+  handler1="handlers/$1.$2.$3"
+  handler2="handlers/$1"
+  {
+    {
+      [[ -f "$handler1" ]] &&          { [[ -n $DEBUG ]] && echo "executing handler '$handler1'"     ; $handler1 "$2" "$3" "$4" 2>&1 ; } 
+      [[ -f "$handler2" ]] && shift && { [[ -n $DEBUG ]] && echo "executing handler '$handler2' $*"  ; ./$handler2 "$@"; };
+    } 2>$TMPFILE.stderr 
+    check_error $TMPFILE.stderr
+  } | while read line; do echo "$line"; done
+  [[ ! -n $1 ]] && _usage 
+fi
+exit 0
