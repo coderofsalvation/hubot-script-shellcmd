@@ -40,7 +40,8 @@ Sometimes its easier to trigger bashscripts or do things in bash (git deployment
 
 ###  Configuration:
 
-This plugin uses a bash-script as entry plugin for security reasons:
+This plugin uses a bash-script as entry point for the bash-commands for security reasons.
+By default it will point to the shipped bash-script, but can be changed by setting an (startup) env-var:
 
-    HUBOT_SHELLCMD="bash/handler" 
+    HUBOT_SHELLCMD="/foo/bar/myhandler" 
 

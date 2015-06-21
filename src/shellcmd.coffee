@@ -16,6 +16,7 @@
 # Author:
 #  Leon van Kammen / Coderofsalvation
 #
+process.env.HUBOT_SHELLCMD = __dirname+"/../bash/handler" if not process.env.HUBOT_SHELLCMD?
 
 module.exports = (robot) ->
   run_cmd = (cmd, args, cb ) ->
