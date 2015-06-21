@@ -45,3 +45,14 @@ By default it will point to the shipped bash-script, but can be changed by setti
 
     HUBOT_SHELLCMD="/foo/bar/myhandler" 
 
+in short, you can run hubot like this on the commandline:
+
+    $ HUBOT_SHELLCMD="/foo/bar/myhandler" node <hubotfile>
+
+or just put this somewhere in your code:
+
+    process.env.HUBOT_SHELLCMD="/foo/bar/myhandler";
+
+or just put this in your .bashrc or shellscript before launching hubot
+
+    export HUBOT_SHELLCMD="/foo/bar/myhandler" 
