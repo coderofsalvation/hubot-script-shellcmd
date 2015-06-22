@@ -40,12 +40,14 @@ Sometimes its easier to trigger bashscripts or do things in bash (git deployment
 
 ###  Configuration:
 
-Easiest way to get started:
+Just drop / paste your bash-scripts into `hubot_dir/node_modules/hubot-script-shellcmd/src/bash/handlers/`
+Done.
 
-paste your bash-scripts to `hubot_dir/node_modules/hubot-script-shellcmd/src/bash/handlers/`
+# Optional: specify different paths
 
-This plugin uses a bash-script as entry point for the bash-commands for security reasons.
-By default it will point to the shipped bash-script, but can be changed by setting an (startup) env-var:
+The plugin uses a main bash-script as entry point for the your bash-scripts in `handlers/*` for security reasons.
+By default it will point to `bash/handler`, for most people this will be fine.
+Some people, who want to bypass this behavious can specify their own startup-script by setting an (startup) env-var:
 
     HUBOT_SHELLCMD="/foo/bar/myhandler" 
 
@@ -60,3 +62,12 @@ or just put this somewhere in your code:
 or just put this in your .bashrc or shellscript before launching hubot
 
     export HUBOT_SHELLCMD="/foo/bar/myhandler" 
+
+The default handler works fine, but you could define one like this:
+
+myhandler:
+
+    allowed="dofoo bar reset"
+    for cmd in allowed; do 
+      [[ "$1" == "$cmd" ]] && "$@" # execute if allowed
+    done
