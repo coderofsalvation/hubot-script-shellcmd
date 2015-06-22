@@ -40,6 +40,10 @@ Sometimes its easier to trigger bashscripts or do things in bash (git deployment
 
 ###  Configuration:
 
+Easiest way to get started:
+
+paste your bash-scripts to `hubot_dir/node_modules/hubot-script-shellcmd/src/bash/handlers/`
+
 This plugin uses a bash-script as entry point for the bash-commands for security reasons.
 By default it will point to the shipped bash-script, but can be changed by setting an (startup) env-var:
 
