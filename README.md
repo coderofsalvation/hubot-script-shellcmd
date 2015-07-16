@@ -21,8 +21,8 @@ whenever possible.
     chmod 755 bash/handlers/helloworld
 
     # run bot
-    (add 'hubot-script-shellcmd' to external-scripts.json)
-    bin/hubot
+    (optionally add 'hubot-script-shellcmd' to external-scripts.json)
+    node_modules/.bin/hubot
 
 In hubot:
 
