@@ -43,6 +43,22 @@ Sometimes its easier to trigger bashscripts or do things in bash (git deployment
 Just drop / paste your bash-scripts into `hubot_dir/node_modules/hubot-script-shellcmd/src/bash/handlers/`
 Done.
 
+# Optional: rename the 'shellcmd' directive
+
+Some people would prefer typing `foo helloworld` instead of `shellcmd helloworld`.
+In that case please introduce this environmentvariable:
+
+    HUBOT_SHELLCMD_KEYWORD='foo'
+  
+    (for more env-var usage see the next section)
+
+For example:
+
+    $ HUBOT_SHELLCMD_KEYWORD='foo' .bin/hubot 
+    hubot> hubot foo
+    Available commands:
+      helloworld
+
 # Optional: specify different paths
 
 The plugin uses a main bash-script as entry point for the your bash-scripts in `handlers/*` for security reasons.

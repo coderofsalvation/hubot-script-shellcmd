@@ -17,6 +17,7 @@
 #  Leon van Kammen / Coderofsalvation
 #
 process.env.HUBOT_SHELLCMD = __dirname+"/../bash/handler" if not process.env.HUBOT_SHELLCMD?
+process.env.HUBOT_SHELLCMD_KEYWORD = "shellcmd" if not process.env.HUBOT_SHELLCMD_KEYWORD
 
 module.exports = (robot) ->
   run_cmd = (cmd, args, cb ) ->
@@ -26,11 +27,11 @@ module.exports = (robot) ->
     child.stderr.on "data", (buffer) -> cb buffer.toString()
     #child.stdout.on "end", -> cb resp
   
-  robot.respond /shellcmd$/i, (msg) ->
+  robot.respond "/"+process.env.HUBOT_SHELLCMD_KEYWORD+"$/i", (msg) ->
     cmd = process.env.HUBOT_SHELLCMD;
     run_cmd cmd, [], (text) -> msg.send text
 
-  robot.respond /shellcmd (.*)/i, (msg) ->
+  robot.respond "/"+process.env.HUBOT_SHELLCMD_KEYWORD+" (.*)/i", (msg) ->
     msg.match[0] = msg.match[0].replace(/^[a-z0-9]+$/i);
     msg.match.shift();
     args = msg.match[0].split(" ");
