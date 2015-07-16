@@ -14,14 +14,12 @@ whenever possible.
     # install
     cd <yourhubotdir>
     npm install hubot-script-shellcmd
+
+    # optional: separate your shellcmds from the npm module
     cp -R node_modules/hubot-script-shellcmd/bash .
 
-    # add shellcommands
-    echo -e "echo helloworld" > bash/handlers/helloworld
-    chmod 755 bash/handlers/helloworld
-
     # run bot
-    (optionally add 'hubot-script-shellcmd' to external-scripts.json)
+    (add 'hubot-script-shellcmd' to external-scripts.json if needed)
     node_modules/.bin/hubot
 
 In hubot:
@@ -42,6 +40,8 @@ Sometimes its easier to trigger bashscripts or do things in bash (git deployment
 
 Just drop / paste your bash-scripts into `hubot_dir/node_modules/hubot-script-shellcmd/src/bash/handlers/`
 Done.
+
+> In case you separated your bashscripts from the npm module (see Example Section) the directory is `bash/handlers` in hubot's working directory
 
 # Optional: rename the 'shellcmd' directive
 
