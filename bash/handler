@@ -30,13 +30,8 @@ if [[ "$me" == "handler" ]]; then
   _log "$*"
   handler1="handlers/$1.$2.$3"
   handler2="handlers/$1"
-  {
-    {
-      [[ -f "$handler1" ]] &&          { [[ -n $DEBUG ]] && echo "executing handler '$handler1'"     ; $handler1 "$2" "$3" "$4" 2>&1 ; } 
-      [[ -f "$handler2" ]] && shift && { [[ -n $DEBUG ]] && echo "executing handler '$handler2' $*"  ; ./$handler2 "$@"; };
-    } 2>$TMPFILE.stderr 
-    check_error $TMPFILE.stderr
-  } | while read line; do echo "$line"; done
+  [[ -f "$handler1" ]] && $handler1 "$2" "$3" "$4" 2>&1 ;
+  [[ -f "$handler2" ]] && shift && exec $handler2 "$@"  ;
   [[ ! -n $1 ]] && _usage 
 fi
 exit 0
