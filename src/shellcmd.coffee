@@ -25,20 +25,27 @@ if not fs.existsSync(process.env.HUBOT_SHELLCMD)
 process.env.HUBOT_SHELLCMD_KEYWORD = "shellcmd" if not process.env.HUBOT_SHELLCMD_KEYWORD
 
 module.exports = (robot) ->
-  run_cmd = (cmd, args, cb ) ->
+  run_cmd = (cmd, args, envs, cb ) ->
+    console.log "spawn!"
     spawn = require("child_process").spawn
-    child = spawn(cmd, args)
+    opts = 
+        env: envs        
+    child = spawn(cmd, args, opts)
     child.stdout.on "data", (buffer) -> cb buffer.toString()
     child.stderr.on "data", (buffer) -> cb buffer.toString()
     #child.stdout.on "end", -> cb resp
   
   robot.respond "/"+process.env.HUBOT_SHELLCMD_KEYWORD+"$/i", (msg) ->
     cmd = process.env.HUBOT_SHELLCMD;
-    run_cmd cmd, [], (text) -> msg.send text
+    envs = {}
+    envs["HUBOT_USER_" + key.toUpperCase()] = value for key, value of msg.envelope.user
+    run_cmd cmd, [], envs, (text) -> msg.send text
 
   robot.respond "/"+process.env.HUBOT_SHELLCMD_KEYWORD+" (.*)/i", (msg) ->
     msg.match[0] = msg.match[0].replace(/^[a-z0-9]+$/i);
     msg.match.shift();
     args = msg.match[0].split(" ");
     cmd = process.env.HUBOT_SHELLCMD;
-    run_cmd cmd, args, (text) -> msg.send text.replace("\n","")
+    envs = {}
+    envs["HUBOT_USER_" + key.toUpperCase()] = value for key, value of msg.envelope.user
+    run_cmd cmd, args, envs, (text) -> msg.send text.replace("\n","")
