@@ -19,7 +19,7 @@ is_function() {
 
 check_error(){
   [[ ! X"$(wc -c "$1" | cut -d" " -f1)" = X"0" ]] && {
-    echo "please check the logs, the command was unsuccesfull :/"
+    echo "please check the logs, the command was unsuccessful :/"
     cat "$1" | while read line; do _log "$line"; done
   }
 }
