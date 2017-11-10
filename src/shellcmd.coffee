@@ -37,7 +37,7 @@ module.exports = (robot) ->
   
   robot.respond "/"+process.env.HUBOT_SHELLCMD_KEYWORD+"$/i", (msg) ->
     cmd = process.env.HUBOT_SHELLCMD;
-    envs = {}
+    envs = process.env;
     envs["HUBOT_USER_" + key.toUpperCase()] = value for key, value of msg.envelope.user
     run_cmd cmd, [], envs, (text) -> msg.send text
 
@@ -46,6 +46,7 @@ module.exports = (robot) ->
     msg.match.shift();
     args = msg.match[0].split(" ");
     cmd = process.env.HUBOT_SHELLCMD;
-    envs = {}
+    envs = process.env;
     envs["HUBOT_USER_" + key.toUpperCase()] = value for key, value of msg.envelope.user
     run_cmd cmd, args, envs, (text) -> msg.send text.replace("\n","")
+
