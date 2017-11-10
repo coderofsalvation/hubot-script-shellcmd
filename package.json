@@ -1,6 +1,6 @@
 {
   "name": "hubot-script-shellcmd",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Easily list/Execute (bash) shellcommands from a specified folder",
   "main": "index.coffee",
   "scripts": {
