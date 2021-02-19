@@ -10,8 +10,8 @@
 # where 'handler' is a shellscript like:
 #
 # Commands:
-#  Hubot shellcmd - list (bash)shell commands 
-#  Hubot shellcmd <foo> - performs bashshell command
+#  Hubot shell - list (bash)shell commands 
+#  Hubot shell <foo> - performs bashshell command
 #
 # Author:
 #  Leon van Kammen / Coderofsalvation
@@ -22,7 +22,7 @@ process.env.HUBOT_SHELLCMD = "bash/handler" if not process.env.HUBOT_SHELLCMD
 if not fs.existsSync(process.env.HUBOT_SHELLCMD)
   console.log process.env.HUBOT_SHELLCMD+" not found in hubot working dir..defaulting to example handler at "+__dirname+"/../bash/handler"
   process.env.HUBOT_SHELLCMD = __dirname+"/../bash/handler" 
-process.env.HUBOT_SHELLCMD_KEYWORD = "shellcmd" if not process.env.HUBOT_SHELLCMD_KEYWORD
+process.env.HUBOT_SHELLCMD_KEYWORD = "shell" if not process.env.HUBOT_SHELLCMD_KEYWORD
 
 module.exports = (robot) ->
   run_cmd = (cmd, args, envs, cb ) ->
