@@ -6,8 +6,8 @@ whenever possible.
 
 ### Commands:
 
-* Hubot shellcmd - list (bash)shell commands 
-* Hubot shellcmd <foo> - performs bashshell command
+* Hubot shell - list (bash)shell commands 
+* Hubot shell <foo> - performs bashshell command
 
 ### Example
 
@@ -24,12 +24,12 @@ whenever possible.
 
 In hubot:
 
-    you> hubot shellcmd
+    you> hubot shell
 
     hubot> Available commands:
     hubot>   helloworld
 
-    you> hubot shellcmd helloworld 
+    you> hubot shell helloworld 
     hubot> helloworld
 
 ### Why
@@ -43,7 +43,7 @@ Done.
 
 > In case you separated your bashscripts from the npm module (see Example Section) the directory is `bash/handlers` in hubot's working directory
 
-# Optional: rename the 'shellcmd' directive
+# Optional: rename the 'shell' directive
 
 Some people would prefer typing `foo helloworld` instead of `shellcmd helloworld`.
 In that case please introduce this environmentvariable:
